@@ -8,6 +8,7 @@ public class Portfolio {
     @Id
     private String id;
     private String fullName;
+    private String photo;
     private String position;
     private String description;
 
@@ -42,5 +43,13 @@ public class Portfolio {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

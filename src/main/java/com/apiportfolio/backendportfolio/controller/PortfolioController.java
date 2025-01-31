@@ -3,9 +3,9 @@ package com.apiportfolio.backendportfolio.controller;
 import com.apiportfolio.backendportfolio.model.Portfolio;
 import com.apiportfolio.backendportfolio.service.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/portfolio")
@@ -13,28 +13,27 @@ public class PortfolioController {
     @Autowired
     private PortfolioService portfolioService;
 
+    // Obtener el único documento del portfolio
     @GetMapping
-    public List<Portfolio> getAllPortfolios() {
-        return portfolioService.getAllPortfolios();
+    public Portfolio getPortfolio() {
+        return portfolioService.getPortfolio();
     }
 
-    @GetMapping("/{id}")
-    public Portfolio getPortfolioById(@PathVariable String id) {
-        return portfolioService.getPortfolioById(id);
-    }
+    // Crear o actualizar el único documento del portfolio
+    @PutMapping(consumes = {"multipart/form-data"})
+    public ResponseEntity<Portfolio> upsertPortfolio(
+            @RequestParam("fullName") String fullName,
+            @RequestParam("position") String position,
+            @RequestParam("description") String description,
+            @RequestParam(value = "photo", required = false) MultipartFile photo) {
 
-    @PostMapping
-    public Portfolio createPortfolio(@RequestBody Portfolio portfolio) {
-        return portfolioService.createPortfolio(portfolio);
-    }
-
-    @PutMapping("/{id}")
-    public Portfolio updatePortfolio(@PathVariable String id, @RequestBody Portfolio portfolio) {
-        return portfolioService.updatePortfolio(id, portfolio);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deletePortfolio(@PathVariable String id) {
-        portfolioService.deletePortfolio(id);
+        try {
+            Portfolio updatedPortfolio = portfolioService.upsertPortfolio(fullName, position, description, photo);
+            return ResponseEntity.ok(updatedPortfolio);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null); // Puedes mejorar este manejo de errores
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(null); // Manejo de errores genéricos
+        }
     }
 }
