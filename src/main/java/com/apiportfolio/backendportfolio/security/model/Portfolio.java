@@ -1,4 +1,4 @@
-package com.apiportfolio.backendportfolio.model;
+package com.apiportfolio.backendportfolio.security.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,6 +11,9 @@ public class Portfolio {
     private String photo;
     private String position;
     private String description;
+    private String email;
+    private String password;
+    private String phone;
 
     // Getters y Setters
     public String getId() {
@@ -29,6 +32,14 @@ public class Portfolio {
         this.fullName = fullName;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     public String getPosition() {
         return position;
     }
@@ -45,11 +56,27 @@ public class Portfolio {
         this.description = description;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

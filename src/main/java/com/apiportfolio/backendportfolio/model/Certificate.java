@@ -8,7 +8,7 @@ public class Certificate {
     @Id
     private String id;
     private String name;
-    private String image;
+    private String imageUrl;
 
     public String getName() {
         return name;
@@ -16,11 +16,11 @@ public class Certificate {
     public void setName(String name) {
         this.name = name;
     }
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
     public String getId() {
         return id;
