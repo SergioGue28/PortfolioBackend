@@ -34,5 +34,4 @@ public class PortfolioController {
                 phone, photo);
         return ResponseEntity.ok(updatedPortfolio);
     }
-
 }

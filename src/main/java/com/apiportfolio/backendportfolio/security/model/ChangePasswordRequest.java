@@ -30,4 +30,3 @@ public class ChangePasswordRequest {
         this.passwordConfirmation = passwordConfirmation;
     }
 }
-

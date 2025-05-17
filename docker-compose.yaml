@@ -4,18 +4,31 @@ services:
   portfolio-db:
     image: mongo
     container_name: portfolio-db
+    restart: always
     ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
+      - "27018:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     networks:
       - portfolio-network
 
-volumes:
-  mongo-data:
+  portfolio-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: portfolio-api
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - portfolio-db
+    env_file:
+      - .env
+    environment:
+      MONGODB_URI: ${MONGODB_URI}
+    networks:
+      - portfolio-network
 
 networks:
   portfolio-network:

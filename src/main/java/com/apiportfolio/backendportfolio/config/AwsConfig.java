@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AwsConfig {
 
-    @Value("${aws.accessKeyId}") 
+    @Value("${aws.accessKeyId}")
     private String awsAccessKeyId;
 
     @Value("${aws.secretAccessKey}")

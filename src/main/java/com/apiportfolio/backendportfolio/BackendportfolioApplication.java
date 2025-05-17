@@ -11,5 +11,4 @@ public class BackendportfolioApplication {
 		SpringApplication.run(BackendportfolioApplication.class, args);
 		
 	}
-
 }
